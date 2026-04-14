@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a0a;
+  --bg-elev: #111111;
+  --bg-elev-2: #171717;
+  --border: #262626;
+  --border-soft: #1f1f1f;
+  --fg: #ededed;
+  --fg-dim: #a3a3a3;
+  --fg-mute: #737373;
+  --accent: #00d4ff;
+  --accent-2: #7cff3d;
+  --warn: #f5a524;
+  --danger: #ef4444;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-bg-elev-2: var(--bg-elev-2);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-fg: var(--fg);
+  --color-fg-dim: var(--fg-dim);
+  --color-fg-mute: var(--fg-mute);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+html {
+  /* Bump the rem baseline so all Tailwind text-* classes scale up ~12%.
+     Default is 16px; 18px makes text-xs=13.5, text-sm=15.75, text-base=18. */
+  font-size: 18px;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 5px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+/* Utility: tight badge */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 7px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  color: var(--fg-dim);
+  background: var(--bg-elev);
+  max-width: 100%;
+  white-space: normal;
+  word-break: normal;
+}
+.chip-accent {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-elev));
+}
+.chip-accent-2 {
+  border-color: color-mix(in srgb, var(--accent-2) 40%, transparent);
+  color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 8%, var(--bg-elev));
+}
+.chip-warn {
+  border-color: color-mix(in srgb, var(--warn) 40%, transparent);
+  color: var(--warn);
+  background: color-mix(in srgb, var(--warn) 8%, var(--bg-elev));
+}
+
+/* Waveform decoration */
+.waveform {
+  --bar: #262626;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--bar) 0,
+    var(--bar) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+}
+
+/* Focus styles */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Kill the native number input spinner — the default up/down arrows
+   render inconsistently and look bad on dark themes. Use text-plus
+   typing (min/max clamping lives in the handler). */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
